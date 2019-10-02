@@ -8,25 +8,34 @@ void setup() {
 	// Draw the ground
 	fill(70, 200, 50);
 	rect(0, height - 200, width, 200);
+	// Call the draw tree function
+	drawTree(50, 80, 25);
+}
+
+void drawTree(float thickness, int numOfSegments, int numOfBranches) { // Draws a tree using lightning bolts
 	// Draw the tree
-	int numOfBranches = 20; // The number of branches that the program draws to make the tree
 	for(int i = 0; i < numOfBranches; i++) {
-		drawLightning(width/2, height - 100, 50);
+		drawLightning((float)(width/2.0 + (Math.random() * thickness - thickness/2.0)), height - 100, numOfSegments);
+		try {
+			Thread.sleep(100);
+		}
+		catch(InterruptedException e) {
+		}
 	}
 }
 
-void drawLightning(float startX, float startY, int length) {
+void drawLightning(float startX, float startY, int numOfSegments) { // Draws brown lightning bolts
 	// Set current position to the starting position
 	float x = startX;
 	float y = startY;
 	// Set the style of the lightning bolt
 	push();
-	stroke(201, 135, 42);
+	stroke(50, 150, 50);
 	strokeWeight(10);
 
-	for(int i = 0; i < length; i++) {
+	for(int i = 0; i < numOfSegments; i++) {
 		// Figure out the displacement of the end point
-		float displaceX = (float)(Math.random() * (100 * i/(length - 1)) - (50 * i/(length - 1)));
+		float displaceX = (float)(Math.random() * 15 - 15/2);
 		float displaceY = (float)(Math.random() * -20);
 		// Draw the line
 		line(x, y, x + displaceX, y + displaceY);
