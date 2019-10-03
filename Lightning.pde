@@ -15,34 +15,60 @@ void setup() {
 void drawTree(float thickness, int numOfSegments, int numOfBranches) { // Draws a tree using lightning bolts
 	// Draw the tree
 	for(int i = 0; i < numOfBranches; i++) {
-		drawLightning((float)(width/2.0 + (Math.random() * thickness - thickness/2.0)), height - 100, numOfSegments);
-		try {
-			Thread.sleep(100);
+		drawLightning(, numOfSegments);
+	}
+}
+
+class BeanStalk {
+	// The center of the stalk and the thickness
+	float x, y, thickness;
+	int numOfSegments; // The number of segments of each stalk
+	RandomLine[] lines; // An array holding all the lines of the bean stalk
+
+	BeanStalk(float argX, float argY, float argThickness, int argNumOfSegments, int numOfStalks) {
+		x = argX;
+		y = argY;
+		thickness = argThickness;
+		numOfSegments = argNumOfSegments;
+		lines = new RandomLine(numOfStalks);
+		for(int i = 0; i < numOfStalks; i++) {
+			lines[i] = new RandomLine((float)(width/2.0 + (Math.random() * thickness - thickness/2.0)), height - 100, 10, color(Math.random() * 255), Math.random() * 255), Math.random() * 255));
 		}
-		catch(InterruptedException e) {
+	}
+
+	void updateAndDraw() { // Updates all lines of the beanstalk
+		for(int i = 0; i < lines.length - 1; i++) {
+			lines[i].updateAndDraw();
 		}
 	}
 }
 
-void drawLightning(float startX, float startY, int numOfSegments) { // Draws brown lightning bolts
-	// Set current position to the starting position
-	float x = startX;
-	float y = startY;
-	// Set the style of the lightning bolt
-	push();
-	stroke(50, 150, 50);
-	strokeWeight(10);
+class RandomLine {
+	// The current position of the line
+	float x, y, weight;
+	int lineColor;
 
-	for(int i = 0; i < numOfSegments; i++) {
-		// Figure out the displacement of the end point
+	RandomLine(float argX, float argY, float argWeight, int argLineColor) {
+		x = argX;
+		y = argY;
+		weight = argWeight;
+		lineColor = argLineColor;
+	}
+
+	void updateAndDraw() {
+		// Calculates a random displacement
 		float displaceX = (float)(Math.random() * 15 - 15/2);
 		float displaceY = (float)(Math.random() * -20);
-		// Draw the line
+		// Applies the syle
+		push(); // Saves current style
+		stroke(lineColor);
+		strokeWeight(weight);
+		// Draws the line
 		line(x, y, x + displaceX, y + displaceY);
-		// Update the current position to the end point
+		// Update the current position to the end points
 		x += displaceX;
 		y += displaceY;
+		// Undos style
+		pop();
 	}
-	// Undo the style
-	pop();
 }
