@@ -66,7 +66,6 @@ class RandomLine {
 		float displaceX = (float)(Math.random() * 15 - 15/2);
 		float displaceY = (float)(Math.random() * -20);
 		// Applies the syle
-		push(); // Saves current style
 		stroke(lineColor);
 		strokeWeight(weight);
 		// Draws the line
@@ -74,7 +73,5 @@ class RandomLine {
 		// Update the current position to the end points
 		x += displaceX;
 		y += displaceY;
-		// Undos style
-		pop();
 	}
 }
