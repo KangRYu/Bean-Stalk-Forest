@@ -18,7 +18,7 @@ void setup() {
 }
 
 void draw() {
-	aForest.updateAndDraw();
+	aForest.updateAndDrawForest();
 }
 
 class Forest {
@@ -39,7 +39,7 @@ class Forest {
 		}
 	}
 
-	void updateAndDraw() { // Updates all lines of the Forest
+	void updateAndDrawForest() { // Updates all lines of the Forest
 		if(currentSegment < numOfSegments) { // Runs only if the number of segments hasn't reached the max
 			for(int i = 0; i < lines.length - 1; i++) {
 				lines[i].updateAndDraw();
