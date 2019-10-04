@@ -1,13 +1,11 @@
 // The variable holding the bean stalk object
 Forest aForest;
 
-void settings() {
-	fullScreen();
-}
-
 void setup() {
 	// Set framerate
 	frameRate(15);
+	// Set window size
+	size(500, 500);
 	// Style
 	noStroke();
 	// Draw the background
@@ -16,7 +14,7 @@ void setup() {
 	fill(70, 200, 50);
 	rect(0, height - 200, width, 200);
 	// Initializes the bean stalk
-	aForest = new Forest(width/2, height - 100, width, 100, 100);
+	aForest = new Forest(width/2, height - 100, width, 50, 100);
 }
 
 void draw() {
